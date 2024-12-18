@@ -3,8 +3,8 @@ const { ApolloServer } = require('apollo-server-express');
 const express = require('express');
 const cookieParser = require("cookie-parser");
 require('dotenv').config();
-const { typeDefs } = require('../schemas/typedefs');
-const { resolvers } = require('../schemas/resolvers');
+const { typeDefs } = require('./schemas/typedefs');
+const { resolvers } = require('./schemas/resolvers');
 const { getUserFromToken } = require('../utils/context');
 const { connectDB } = require('../connection/db');
 
