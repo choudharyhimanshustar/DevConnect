@@ -33,6 +33,9 @@ const server = new ApolloServer({
         const user = getUserFromToken(token);
         return { user, res };
     },
+    persistedQueries: {
+      cache: "bounded", // Bounded cache for persisted queries
+  },
 });
 
 async function startServer() {
