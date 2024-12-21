@@ -31,7 +31,7 @@ const SignUp = () => {
           email, password
         }
       })
-      console.log(response.data);
+      console.log("this is response",response.data);
       router.push('/')
     } catch (error) {
       console.log(error);

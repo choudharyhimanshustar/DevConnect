@@ -42,7 +42,7 @@ const SignUp = () => {
       <div className='flex flex-col space-y-8 w-full max-w-md border rounded-xl p-8 border-2'>
         <div className='flex flex-col mb-4 items-center space-y-2'>
           <h1 className="text-black text-3xl md:text-5xl font-bold text-center">Welcome Back!</h1>
-          <span className="font-semibold text-sm md:text-md text-center">Welcome Back! Let's continue building together</span>
+          <span className="font-semibold text-sm md:text-md text-center">Welcome Back! Let&apos;s continue building together</span>
         </div>
         <form className='flex flex-col space-y-4' onSubmit={handleSubmit}>
           <input
