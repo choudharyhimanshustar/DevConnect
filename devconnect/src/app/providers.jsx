@@ -4,7 +4,6 @@ import Head from "next/head";
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER,
-  credentials: 'include'
 });
 
 export default function Providers({ children }) {
