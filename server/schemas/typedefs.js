@@ -15,7 +15,8 @@ type Query{
 }
 type Mutation{
     signup(email:String!,password:String!):AuthPayload
-    login(email:String!,password:String!):AuthPayload
+    login(email:String!,password:String!):String!
+    verifyOTP(email:String!,otp:Int!):AuthPayload
 }
 `
 module.exports={typeDefs};

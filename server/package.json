@@ -1,8 +1,9 @@
 {
   "scripts": {
-   "start":"nodemon index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
+    "@sendgrid/mail": "^8.1.4",
     "apollo-server": "^3.13.0",
     "apollo-server-express": "^3.13.0",
     "bcryptjs": "^2.4.3",
@@ -13,6 +14,8 @@
     "graphql": "^16.9.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
+    "nodemailer": "^6.9.16",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^3.1.7",
     "serverless-http": "^3.2.0"
   },
