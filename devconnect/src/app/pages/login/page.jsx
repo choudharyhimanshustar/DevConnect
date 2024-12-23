@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-import { verify } from 'crypto';
 
 const login = gql`
   mutation  ($email:String!,$password:String!){
