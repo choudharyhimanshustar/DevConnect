@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-const User = require('../models/user')
+const {User,Profile} = require('../models/user')
 const { generateToken } = require('../utils/auth')
 const { sgMail } = require('../utils/mail')
 const { generateOTP } = require('../utils/otp')
@@ -80,6 +80,12 @@ const resolvers = {
                 maxAge: 10 * 24 * 60 * 60 * 1000
             })
             return { token, user };
+        },
+        createUserProfile:async(_, {name,skills,linkedin,github,about,dp})=>{
+            const newProfile=new Profile({name,skills,linkedin,github,about,dp});
+            await newProfile.save();
+            console.log("Profile created successfully");
+            return newProfile;
         }
     }
 };

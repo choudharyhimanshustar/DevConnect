@@ -70,18 +70,18 @@ const Login = () => {
             placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='border-black border text-center rounded-2xl border-2 p-2'
+            className='border-black border text-center rounded-lg border-2 p-2'
           />
           <input
             type='password'
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='border-black border text-center rounded-2xl border-2 p-2 '
+            className='border-black border text-center rounded-lg border-2 p-2 '
           />
           <button
             type='submit'
-            className='p-2 rounded-2xl bg-black text-white hover:bg-gray-800 transition duration-300'>
+            className='p-2 rounded-lg bg-black text-white hover:bg-gray-800 transition duration-300'>
             Submit
           </button>
         </form>
