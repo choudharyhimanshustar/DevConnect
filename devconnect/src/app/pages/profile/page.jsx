@@ -70,7 +70,7 @@ const Profile = () => {
                         isMulti placeholder='Skills'
                         className='border-black border  rounded-lg border-2 max-w-[50vw] max-h-[30vh]'
                         styles={{
-                            control: (baseStyles, state) => ({
+                            control: (baseStyles) => ({
                                 ...baseStyles,
                                 border: "none",
                                 boxShadow: "none",
