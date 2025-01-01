@@ -32,13 +32,13 @@ const SignUp = () => {
         }
       })
       console.log("this is response",response.data);
-      router.push('/')
+      router.push('/pages/profile')
     } catch (error) {
       console.log(error);
     }
   }
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
+    <div className="flex justify-center items-center max-h-screen w-90vw p-4">
       <div className='flex flex-col space-y-8 w-full max-w-md border rounded-xl p-8 border-2'>
         <div className='flex flex-col mb-4 items-center space-y-2'>
           <h1 className="text-black text-3xl md:text-5xl font-bold text-center">Get Started</h1>

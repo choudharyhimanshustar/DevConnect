@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import CreatableSelect from 'react-select/creatable';
 import { techSkills } from '../../../utils/skillsOptions'
 import Image from 'next/image';
@@ -17,7 +17,7 @@ mutation createUserProfile($name:String!,$skills:[String]!,$linkedin:String,$git
     }
 }
 `
-const profile = () => {
+const Profile = () => {
     // Hooks
     const [dp, setDp] = useState("https://i.pinimg.com/736x/27/da/dd/27dadd800cceb522fe16e092392ecb0e.jpg");
     const [name, setName] = useState('');
@@ -115,4 +115,4 @@ const profile = () => {
     )
 }
 
-export default profile
+export default Profile
