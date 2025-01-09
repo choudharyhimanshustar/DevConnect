@@ -1,9 +1,10 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-const {User,Profile} = require('../models/user')
+const { User, Profile } = require('../models/user')
 const { generateToken } = require('../utils/auth')
 const { sgMail } = require('../utils/mail')
 const { generateOTP } = require('../utils/otp')
+const axios = require('axios')
 const resolvers = {
     Query: {
         identity: ({ user }) => user
@@ -52,7 +53,7 @@ const resolvers = {
             sgMail
                 .send(mailOptions)
                 .then(() => {
-                    console.log('Email sent')
+                     ('Email sent')
                 })
                 .catch((error) => {
                     console.error(error)
@@ -61,16 +62,16 @@ const resolvers = {
         },
         verifyOTP: async (_, { email, otp }, { res }) => {
             const user = await User.findOne({ email });
-            console.log("This is the saved OTP", user.otp);
-            console.log("This is the user OTP", otp);
+             ("This is the saved OTP", user.otp);
+             ("This is the user OTP", otp);
             if (user.otp !== otp) {
                 throw new Error("Invalid OTP")
             }
             if (Date.now() > user.otpExpiry) {
                 throw new Error("OTP expired")
             }
-            user.otp=null;
-            user.otpExpiry=null;
+            user.otp = null;
+            user.otpExpiry = null;
             await user.save();
             const token = generateToken(user);
             res.cookie("token", token, {
@@ -81,11 +82,47 @@ const resolvers = {
             })
             return { token, user };
         },
-        createUserProfile:async(_, {name,skills,linkedin,github,about,dp})=>{
-            const newProfile=new Profile({name,skills,linkedin,github,about,dp});
+        createUserProfile: async (_, { name, skills, linkedin, github, about, dp }) => {
+            const newProfile = new Profile({ name, skills, linkedin, github, about, dp });
             await newProfile.save();
-            console.log("Profile created successfully");
+             ("Profile created successfully");
             return newProfile;
+        },
+        authfortoken: async (_, { code }, { res }) => {
+            try {
+                const response = await axios.post(process.env.GOOGLE_ACCESS_TOKEN_URL, {
+                    code,
+                    client_id: process.env.GOOGLE_CLIENT_ID,
+                    client_secret: process.env.GOOGLE_CLIENT_SECRET,
+                    redirect_uri: process.env.GOOGLE_CALLBACK_URL,
+                    grant_type: 'authorization_code',
+                })
+
+                const { access_token } = response.data;
+                const validResponse = await axios.get(process.env.GOOGLE_TOKEN_INFO_URL, {
+                    params: { access_token }
+                })
+                const email=validResponse.data.email;
+                const user = await User.findOne({ email });
+                if (!user) {
+                    const newUser = new User({ email });
+                    await newUser.save();
+                }
+                const token = generateToken(validResponse.data);
+                 ("TOKEN: ", token);
+                res.cookie("token", token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "strict",
+                    maxAge: 10 * 24 * 60 * 60 * 1000
+                })
+                return {
+                    success: true,
+                    token
+                }
+            } catch (error) {
+                 ("Error : ", error)
+            }
         }
     }
 };

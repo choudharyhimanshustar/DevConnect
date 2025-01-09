@@ -36,7 +36,7 @@ async function startServer() {
     await server.start();
     server.applyMiddleware({ app, path: '/api/graphql' });
     app.listen(10000, () => {
-        console.log('Server is running on http://localhost:10000');
+         ('Server is running on http://localhost:10000');
     });
 }
 startServer();

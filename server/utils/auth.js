@@ -2,7 +2,7 @@
 const jwt=require('jsonwebtoken');
 const generateToken=(user)=>{
     return jwt.sign({
-        userId:user._id},
+        userEmail:user.email},
         process.env.JWT_SECRET,
     );
 };

@@ -4,10 +4,10 @@ const connectDB=async()=>{
         await mongoose.connect(process.env.MONGODB_URI,{
             useNewURLParser:true,
         });
-        console.log('MongoDB connected');
+         ('MongoDB connected');
     }
     catch(error){
-        console.log('Error connecting to MongoDB',error);
+         ('Error connecting to MongoDB',error);
         process.exit(1);
     }
 };

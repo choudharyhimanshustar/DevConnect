@@ -3,8 +3,7 @@ import { React, useState } from 'react'
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { FaGoogle } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import getGoogleAuthURL from "../../../utils/Auth"
 
 const signup = gql`
   mutation  ($email:String!,$password:String!){
@@ -22,7 +21,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [handleSignUp] = useMutation(signup);
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -31,14 +30,18 @@ const SignUp = () => {
           email, password
         }
       })
-      console.log("this is response",response.data);
+       ("this is response", response.data);
       router.push('/pages/profile')
     } catch (error) {
-      console.log(error);
+       (error);
     }
   }
+  const handleGoogleAuth = () => {
+    const authURL = getGoogleAuthURL();
+    window.location.href = authURL; // Redirect to Google's OAuth screen
+  };
   return (
-    <div className="flex justify-center items-center max-h-screen w-90vw p-4">
+    <div className="flex justify-center items-center min-h-screen w-90vw p-4">
       <div className='flex flex-col space-y-8 w-full max-w-md border rounded-xl p-8 border-2'>
         <div className='flex flex-col mb-4 items-center space-y-2'>
           <h1 className="text-black text-3xl md:text-5xl font-bold text-center">Get Started</h1>
@@ -67,10 +70,9 @@ const SignUp = () => {
         </form>
         <div className='text-center space-y-4'>
           <span className='font-bold'>Or Sign Up with</span>
-          <div className="flex flex-row justify-between space-x-4">
-            <FaGoogle className='cursor-pointer text-2xl hover:text-gray-500 transition duration-300' />
-            <FaGithub className='cursor-pointer text-2xl hover:text-gray-500 transition duration-300' />
-            <FaLinkedin className='cursor-pointer text-2xl hover:text-gray-500 transition duration-300' />
+          <div className="flex flex-row justify-center space-x-4">
+            <FaGoogle onClick={handleGoogleAuth} className='cursor-pointer text-3xl text-gray-500 hover:text-black transition 
+            duration-300 border border-2 rounded-full p-1' />
           </div>
         </div>
       </div>
