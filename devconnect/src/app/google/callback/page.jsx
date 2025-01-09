@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 import { React, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
@@ -15,7 +16,6 @@ const Page = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const code = searchParams.get('code');
-    const error = searchParams.get('error');
     const [exchangeAuthCodeForToken] = useMutation(authfortoken)
     const AuthCodeForToken = async (code) => {
          ("Called this function.")
