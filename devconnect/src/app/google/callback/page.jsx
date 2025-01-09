@@ -49,7 +49,7 @@ const Page = () => {
 export default function GoogleCallbackPage() {
     return (
       <Suspense fallback={<div>Loading...</div>}>
-        {Page()}
+       <Page/>
       </Suspense>
     );
   }
