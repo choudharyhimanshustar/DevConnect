@@ -1,6 +1,6 @@
 /* eslint-disable */
 'use client'
-import { React, useEffect } from 'react'
+import { React, useEffect,Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { gql, useMutation } from '@apollo/client'
 const authfortoken = gql`
@@ -46,4 +46,10 @@ const Page = () => {
     )
 }
 
-export default Page
+export default function GoogleCallbackPage() {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        {Page()}
+      </Suspense>
+    );
+  }
