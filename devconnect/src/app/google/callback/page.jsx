@@ -11,7 +11,7 @@ mutation ($code:String!){
 }
 
 `
-const page = () => {
+const Page = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const code = searchParams.get('code');
@@ -46,4 +46,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
