@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable */
 import { React, useEffect } from 'react'
 import Image from 'next/image'
 import { PiPlugsConnectedFill } from "react-icons/pi";
@@ -43,7 +44,15 @@ const Intro = () => {
                         </span>
                     </div>
                 </div>
-              jit
+                <div className='space-y-4 flex flex-col text-center border border-2 rounded-full p-5 border-dashed'>
+                    <FaHandshake className='mx-auto text-3xl' />
+                    <span className="font-bold text-xl">Collaborate</span>
+                    <div className="w-full text-left text-sm max-w-[10vw]">
+                        <span>
+                        Enables developers to work together seamlessly, sharing updates, code
+                        </span>
+                    </div>
+                </div>
             </div>
             <div className='flex flex-col justify-center items-center p-2'  id='DarthVader' >
                 <Image src={"https://i.pinimg.com/474x/43/89/2f/43892fabc678e6aad8c76ce73167e3bd.jpg"} width={200} height={100} alt={"StarWars"}
