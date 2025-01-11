@@ -57,7 +57,7 @@ const Intro = () => {
             <div className='flex flex-col justify-center items-center p-2'  id='DarthVader' >
                 <Image src={"https://i.pinimg.com/474x/43/89/2f/43892fabc678e6aad8c76ce73167e3bd.jpg"} width={200} height={100} alt={"StarWars"}
                     className='fixed bottom'/>
-                <span className='font-semibold'>We Would Be Honored If You Would Join Us.</span>
+                <span className='font-semibold'>We Would Be Honored If You Would Join Us</span>
             </div>
         </div>
 
