@@ -2,7 +2,6 @@
 import MainHeading from '../ui/MainHeading'
 import Intro from '../ui/Intro'
 import Carousel from '../ui/Carousel'
-import Reviews from '../ui/Reviews'
 import gsap from "gsap";
 import { useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
