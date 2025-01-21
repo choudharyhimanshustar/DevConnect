@@ -14,7 +14,7 @@ connectDB();
 const app = express();
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: process.env.frontendUrl,
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
@@ -36,7 +36,7 @@ async function startServer() {
     await server.start();
     server.applyMiddleware({
         app, cors: {
-            origin: "http://localhost:3000", // Frontend URL
+            origin: process.env.frontendUrl, // Frontend URL
             credentials: true,              // Allow credentials (cookies)
         }, path: '/api/graphql'
     });
