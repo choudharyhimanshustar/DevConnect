@@ -24,13 +24,13 @@ type OAuthResponse{
     token:String!
 }
 type Query{
-    identity:User
+    identity:String
 }
 type Mutation{
     signup(email:String!,password:String!):AuthPayload
     login(email:String!,password:String!):String!
     verifyOTP(email:String!,otp:Int!):AuthPayload
-    createUserProfile(name:String!,skills:[String]!,linkedin:String,github:String,about:String,dp:String!):UserProfile
+    createUserProfile(name:String!,skills:[String]!,linkedin:String,github:String,about:String,dp:String!):UserProfile!
     authfortoken(code:String!):OAuthResponse!
 }
 `

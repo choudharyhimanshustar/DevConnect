@@ -10,6 +10,7 @@ const userSchema=new mongoose.Schema(
 );
 const UserProfile=new mongoose.Schema(
     {
+        email:{type:String,required:true,unique:true},
         name:{type:String,required:true},
         skills:[{type:String}],
         linkedin:{type:String},

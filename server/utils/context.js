@@ -4,7 +4,7 @@ const getUserFromToken=(token)=>{
     if(!token)return null;
     try{
         const decoded=jwt.verify(token,process.env.JWT_SECRET);
-        return User.findById(decoded.userId);
+        return  decoded.userEmail;
     }
     catch{
         return null;

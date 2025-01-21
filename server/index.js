@@ -14,12 +14,12 @@ connectDB();
 const app = express();
 app.use(
     cors({
-      origin: "*",      
-      credentials: true,
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"],
-    })
-  );
+        origin: "http://localhost:3000",
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+);
 app.use(cookieParser());
 
 const server = new ApolloServer({
@@ -28,15 +28,20 @@ const server = new ApolloServer({
     context: ({ req, res }) => {
         const token = req.cookies.token || '';
         const user = getUserFromToken(token);
-        return { user, res };
+        return {token, user, res };
     },
 });
 
 async function startServer() {
     await server.start();
-    server.applyMiddleware({ app, path: '/api/graphql' });
+    server.applyMiddleware({
+        app, cors: {
+            origin: "http://localhost:3000", // Frontend URL
+            credentials: true,              // Allow credentials (cookies)
+        }, path: '/api/graphql'
+    });
     app.listen(10000, () => {
-         console.log('Server is running on http://localhost:10000');
+        console.log('Server is running on http://localhost:10000');
     });
 }
 startServer();

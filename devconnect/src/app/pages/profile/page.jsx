@@ -1,12 +1,12 @@
 /* eslint-disable */
 'use client';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CreatableSelect from 'react-select/creatable';
 import { techSkills } from '../../../utils/skillsOptions'
 import Image from 'next/image';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation, gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
-
+import { ToastContainer, toast } from 'react-toastify';
 const createUserProfile = gql`
 mutation createUserProfile($name:String!,$skills:[String]!,$linkedin:String,$github:String,$about:String,$dp:String!){
     createUserProfile(name:$name,skills:$skills,linkedin:$linkedin,github:$github,about:$about,dp:$dp){
@@ -21,6 +21,12 @@ mutation createUserProfile($name:String!,$skills:[String]!,$linkedin:String,$git
 
 }
 `
+const identity = gql`
+    query
+    {
+        identity
+    }
+`
 const Profile = () => {
     // Hooks
     const [dp, setDp] = useState("https://i.pinimg.com/736x/27/da/dd/27dadd800cceb522fe16e092392ecb0e.jpg");
@@ -30,6 +36,16 @@ const Profile = () => {
     const [github, setGithub] = useState('');
     const [about, setAbout] = useState('');
     const router = useRouter();
+
+    //Queries
+    const { data, loading, error } = useQuery(identity);
+    useEffect(() => {
+        // if (data) console.log("Data:", data);
+        if (loading) console.log("Loading...");
+        // if (error) console.error("Error:", error);
+        if (data?.identity === null)
+            router.push('/pages/login');
+    }, [data, loading, error]);
 
     // Mutation
     const [handleProfile] = useMutation(createUserProfile);
@@ -48,18 +64,18 @@ const Profile = () => {
                 });
                 const response = await res.json();
                 if (response.secure_url) {
-                     ('Image uploaded successfully:', response.secure_url);
                     setDp(response.secure_url);
                 } else {
                     throw new Error('No secure URL returned from Cloudinary');
                 }
-            } catch (error) {  ("Error in uploading image", error) }
+            } catch (error) { ("Error in uploading image", error) }
         }
     }
 
     // JSX
     return (
         <div className='flex flex-col border border-2 w-[90vw] mx-auto mt-4 rounded-lg p-2 max-h-[90vh] space-y-4 text-black'>
+            <ToastContainer />
             <h1 className='mx-auto font-bold  text-xl'>Create Your Profile</h1>
             <div className='space-y-4 flex flex-row min-w-[50vw] justify-between'>
                 <div className='space-y-4 flex flex-col max-w-[50vw] lg:min-w-[50vw] min-h-[40vh] mt-[2vw] mb-[5vw]'>
@@ -107,18 +123,27 @@ const Profile = () => {
                         <span className='text-xs w-[30vw] m-2 mb-20 font-semibold'>It would be better if you do the professional shit on the laptop/desktop</span>
                     </div>
                     <button className='border border-2 px-2 rounded-md mt-30 lg:mt-20 border-black font-semibold text-white bg-black'
-                        onClick={() => {
-                            handleProfile({
-                                variables: {
-                                    name: name,
-                                    skills: skills,
-                                    linkedin: linkedin,
-                                    github: github,
-                                    about: about,
-                                    dp: dp
+                        onClick={async () => {
+                            try {
+                                await handleProfile({
+                                    variables: {
+                                        name,
+                                        skills,
+                                        linkedin,
+                                        github,
+                                        about,
+                                        dp,
+                                    },
+                                });
+
+                            } catch (error) {
+                                if (error.graphQLErrors) {
+                                    console.log("Profile Already Exists");
+                                    toast("Profile Already Exists");
+
                                 }
-                            })
-                            router.push('/')
+                            }
+                            router.push('/');
                         }
                         }>Submit</button>
                 </div>

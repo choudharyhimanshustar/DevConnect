@@ -7,7 +7,9 @@ const { generateOTP } = require('../utils/otp')
 const axios = require('axios')
 const resolvers = {
     Query: {
-        identity: ({ user }) => user
+        identity: (_, __, context) => {
+            return context.token || null;
+        }
     },
     Mutation: {
         signup: async (_, { email, password }, { res }) => {
@@ -53,7 +55,7 @@ const resolvers = {
             sgMail
                 .send(mailOptions)
                 .then(() => {
-                     ('Email sent')
+                    ('Email sent')
                 })
                 .catch((error) => {
                     console.error(error)
@@ -62,8 +64,8 @@ const resolvers = {
         },
         verifyOTP: async (_, { email, otp }, { res }) => {
             const user = await User.findOne({ email });
-             ("This is the saved OTP", user.otp);
-             ("This is the user OTP", otp);
+            ("This is the saved OTP", user.otp);
+            ("This is the user OTP", otp);
             if (user.otp !== otp) {
                 throw new Error("Invalid OTP")
             }
@@ -76,16 +78,23 @@ const resolvers = {
             const token = generateToken(user);
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: true,
-                sameSite: "strict",
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: "lax",
                 maxAge: 10 * 24 * 60 * 60 * 1000
             })
             return { token, user };
         },
-        createUserProfile: async (_, { name, skills, linkedin, github, about, dp }) => {
-            const newProfile = new Profile({ name, skills, linkedin, github, about, dp });
+        createUserProfile: async (_, { name, skills, linkedin, github, about, dp }, context) => {
+            const email = context.user;
+            console.log("Email:", email);
+            const checkEmail = await Profile.findOne({ email });
+            if (checkEmail) {
+                console.log("Profile already exists");
+                return null;
+            }
+            const newProfile = new Profile({ email, name, skills, linkedin, github, about, dp });
             await newProfile.save();
-             ("Profile created successfully");
+            console.log("Profile created successfully");
             return newProfile;
         },
         authfortoken: async (_, { code }, { res }) => {
@@ -102,14 +111,13 @@ const resolvers = {
                 const validResponse = await axios.get(process.env.GOOGLE_TOKEN_INFO_URL, {
                     params: { access_token }
                 })
-                const email=validResponse.data.email;
+                const email = validResponse.data.email;
                 const user = await User.findOne({ email });
                 if (!user) {
                     const newUser = new User({ email });
                     await newUser.save();
                 }
                 const token = generateToken(validResponse.data);
-                 ("TOKEN: ", token);
                 res.cookie("token", token, {
                     httpOnly: true,
                     secure: true,
@@ -121,7 +129,7 @@ const resolvers = {
                     token
                 }
             } catch (error) {
-                 ("Error : ", error)
+                ("Error : ", error)
             }
         }
     }

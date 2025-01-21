@@ -38,7 +38,7 @@ const Login = () => {
           email, otp: parseInt(otp)
         }
       })
-       (response.data);
+      console.log(response.data);
       router.push('/');
     } catch (error) {
        (error);
@@ -52,7 +52,7 @@ const Login = () => {
           email, password
         }
       })
-       (response.data);
+      console.log(response.data);
       setState("OTP");
     } catch (error) {
        (error);

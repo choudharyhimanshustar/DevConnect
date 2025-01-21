@@ -1,9 +1,12 @@
 'use client';
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/client";
 import Head from "next/head";
 const client = new ApolloClient({
+  link: new HttpLink({
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER, // Backend URL
+    credentials: "include",              // Include cookies
+  }),
   cache: new InMemoryCache(),
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER,
 });
 
 export default function Providers({ children }) {
