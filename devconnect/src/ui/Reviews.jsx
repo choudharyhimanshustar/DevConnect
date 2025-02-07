@@ -7,51 +7,52 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Default style
 const Reviews = () => {
   const testimonials = [
     {
-      name: "Anakin SkyWalker",
-      feedback: "Fantastic platform for developers!",
+      name: "Anakin Skywalker",
+      feedback: "The best platform for bloggers!",
       detail:
-        "DevConnect has made it so easy for me to collaborate with like-minded developers. The real-time chat and code sharing features are a game-changer. Highly recommend it!",
+        "This app has transformed my blogging experience. The collaboration tools make it super easy to co-write and get feedback in real time!",
       img: "https://i.pinimg.com/474x/d7/de/e5/d7dee5540ed82113137f61afb800cc44.jpg",
     },
     {
       name: "Padme",
-      feedback: "Great concept, but could improve in performance",
+      feedback: "Seamless writing and editing",
       detail:
-        "The platform is excellent for collaboration, but I've noticed some lag during peak hours. Looking forward to future updates that address this.",
+        "I love how smooth the editing process is. The live collaboration feature has helped me work with my co-authors effortlessly!",
       img: "https://i.pinimg.com/474x/3a/e3/75/3ae3753d754ee6c16a3f3a331c999afb.jpg",
     },
     {
-      name: "ObiWan",
-      feedback: "A must-have for project collaboration",
+      name: "Obi Wan",
+      feedback: "A must-have for content creators",
       detail:
-        "I've been using DevConnect for a few weeks now, and the experience has been amazing. The interface is intuitive, and the ability to find developers with specific skills has saved me so much time.",
+        "The interface is clean, and the workflow is intuitive. It's helped me streamline my blogging process and improve my content quality.",
       img: "https://i.pinimg.com/474x/5f/14/4f/5f144f2b3c07137cb3f1fb021101bfbe.jpg",
     },
     {
       name: "Yoda",
-      feedback: "Limited integrations",
+      feedback: "Great for team projects",
       detail:
-        "The platform is great for basic collaboration, but I wish there were more integrations with tools like Figma or Jira for end-to-end project management.",
+        "As a journalist, collaborating with my team on articles has never been easier. The real-time updates save so much time!",
       img: "https://i.pinimg.com/474x/01/6d/a3/016da38c26970252f02b3d78f5125f60.jpg",
     },
     {
       name: "Luke Skywalker",
-      feedback: "The perfect hub for developers!",
-      detail:"DevConnect brings developers together like no other platform. The skill-matching algorithm is spot on, and the project management tools are super intuitive. It's become my go-to for team collaborations.",
+      feedback: "Enhanced my writing process",
+      detail:
+        "The review system and inline commenting make editing a breeze. It has significantly improved the way I write and publish blogs!",
       img: "https://i.pinimg.com/474x/1d/60/bd/1d60bd415a250714641c2bd135cb9ec9.jpg",
     },
     {
-      name: "Han Solo",
-      feedback: "Incredible networking opportunities!",
+      name: "Hans Solo",
+      feedback: "Perfect for creative teams",
       detail:
-        "I connected with a fantastic front-end developer for my project within hours of signing up. The community is active, and everyone is so supportive. DevConnect truly lives up to its name.",
+        "We use this app for brainstorming, drafting, and finalizing our content. It’s been a game-changer for our editorial team!",
       img: "https://i.pinimg.com/474x/18/ec/f2/18ecf217cbbf5a956630d813999e3f14.jpg",
     },
     {
-      name: "ChewBecca",
-      feedback: "Highly recommend for remote teams.",
+      name: "Chewbacca",
+      feedback: "Highly recommended for bloggers!",
       detail:
-        "As a part of a distributed team, DevConnect has made collaboration effortless. From video calls to task management, everything just works smoothly. It’s like Slack and Trello combined, but better for developers!",
+        "The ability to co-edit and track changes in real-time makes this platform my top choice for blog writing and publishing.",
       img: "https://i.pinimg.com/474x/51/5f/cf/515fcf1c5b3ee74be17bc5e95309be58.jpg",
     },
   ];
