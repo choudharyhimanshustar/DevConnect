@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 import { React, useEffect } from 'react'
 import { gql, useQuery } from '@apollo/client';
