@@ -1,36 +1,37 @@
 /* eslint-disable */
 'use client'
-import { React, useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
-const page = () => {
-    const router = useRouter();
-    const identity = gql`
-    query
-    {
+
+const IDENTITY_QUERY = gql`
+    query Identity {
         identity
     }
-`
-    const { data, loading, error } = useQuery(identity);
-    useEffect(() => {
-        // if (data) console.log("Data:", data);
-        if (loading) console.log("Loading...");
-        // if (error) console.error("Error:", error);
-        if (data?.identity === null) {
+`;
 
+const Page = () => {
+    const router = useRouter();
+    const { data, loading, error } = useQuery(IDENTITY_QUERY);
+
+    useEffect(() => {
+        if (loading) console.log("Loading...");
+        if (data?.identity === null) {
             toast("User not Authorized", {
-                onClose: () => router.push('/pages/login'), position: "top-center",
+                onClose: () => router.push('/pages/login'),
+                position: "top-center",
                 className: "center-toast"
             });
         }
-    }, [data, loading, error]);
+    }, [data, loading, error, router]); // Add `router` dependency
+
     return (
         <div>
             <ToastContainer />
             <h1>Write</h1>
         </div>
-    )
-}
+    );
+};
 
-export default page
+export default Page;
