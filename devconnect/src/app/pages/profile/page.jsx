@@ -43,7 +43,9 @@ const Profile = () => {
         // if (data) console.log("Data:", data);
         if (loading) console.log("Loading...");
         // if (error) console.error("Error:", error);
+        
         if (data?.identity === null)
+
             router.push('/pages/login');
     }, [data, loading, error]);
 

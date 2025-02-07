@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import React from 'react'
 import Image from "next/image";
+import { LiaPenFancySolid } from "react-icons/lia";
 
 
 const MainHeading = () => {
@@ -15,6 +16,13 @@ const MainHeading = () => {
         <div className="items-center justify-center bg-[#ebedec] h-full w-full">
             <div className="flex flex-col items-center justify-center h-screen">
                 <h1 id="heading" className="opacity-0 text-9xl">Writerly</h1>
+                <div 
+                onClick={() => router.push('/pages/write')}
+                className="rounded-lg cursor-pointer fixed top-0 right-0 m-2 mr-10 flex flex-row border-2 border-black px-1 py-2 font-bold items-center justify-center gap-10 w-[15%]">
+                    <p>Start Writing</p>
+                    <LiaPenFancySolid />
+                </div>
+
                 <Image src={"https://i.pinimg.com/736x/e4/4f/d2/e44fd2939bba0cc10e5216c42f1d1263.jpg"} width={150} height={100} alt={"logo"} />
                 <span className="font-semibold">Write | Edit | Collaborate</span>
                 <div className="space-x-10 mt-10 justify-between">
