@@ -25,8 +25,8 @@ const resolvers = {
             const token = generateToken(newUser);
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: true,
-                sameSite: "strict",
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production'?"None":"strict",
                 maxAge: 10 * 24 * 60 * 60 * 1000
             })
             return {
@@ -79,7 +79,7 @@ const resolvers = {
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: "lax",
+                sameSite:process.env.NODE_ENV === 'production'?"None":"strict",
                 maxAge: 10 * 24 * 60 * 60 * 1000
             })
             return { token, user };
@@ -120,8 +120,8 @@ const resolvers = {
                 const token = generateToken(validResponse.data);
                 res.cookie("token", token, {
                     httpOnly: true,
-                    secure: true,
-                    sameSite: "strict",
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: process.env.NODE_ENV === 'production'?"None":"strict",
                     maxAge: 10 * 24 * 60 * 60 * 1000
                 })
                 return {

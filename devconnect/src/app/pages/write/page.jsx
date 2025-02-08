@@ -17,6 +17,7 @@ const Page = () => {
 
     useEffect(() => {
         if (loading) console.log("Loading...");
+        console.log("Data: ", data?.identity);
         if (data?.identity === null) {
             toast("User not Authorized", {
                 onClose: () => router.push('/pages/login'),
