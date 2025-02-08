@@ -1,4 +1,3 @@
-
 'use client';
 import React, { useState, useEffect } from 'react'
 import CreatableSelect from 'react-select/creatable';
@@ -47,7 +46,7 @@ const Profile = () => {
         if (data?.identity === null)
 
             router.push('/pages/login');
-    }, [data, loading, error]);
+    }, [data, loading, error,router]);
 
     // Mutation
     const [handleProfile] = useMutation(createUserProfile);
