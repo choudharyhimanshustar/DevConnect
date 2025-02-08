@@ -9,6 +9,19 @@ const resolvers = {
     Query: {
         identity: (_, __, context) => {
             return context.token || null;
+        },
+        profile: async(_, __, context) => {
+            const user = context.user;
+            console.log("User:", user);
+            const profile = await Profile.findOne({ email: user });
+            if (!profile) {
+                console.log("Profile not found");
+                return null;
+            }
+            else {
+                console.log("Profile FOund")
+                return profile;
+            }
         }
     },
     Mutation: {
@@ -26,7 +39,7 @@ const resolvers = {
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: process.env.NODE_ENV === 'production'?"None":"strict",
+                sameSite: process.env.NODE_ENV === 'production' ? "None" : "strict",
                 maxAge: 10 * 24 * 60 * 60 * 1000
             })
             return {
@@ -79,7 +92,7 @@ const resolvers = {
             res.cookie("token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite:process.env.NODE_ENV === 'production'?"None":"strict",
+                sameSite: process.env.NODE_ENV === 'production' ? "None" : "strict",
                 maxAge: 10 * 24 * 60 * 60 * 1000
             })
             return { token, user };
@@ -121,7 +134,7 @@ const resolvers = {
                 res.cookie("token", token, {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
-                    sameSite: process.env.NODE_ENV === 'production'?"None":"strict",
+                    sameSite: process.env.NODE_ENV === 'production' ? "None" : "strict",
                     maxAge: 10 * 24 * 60 * 60 * 1000
                 })
                 return {

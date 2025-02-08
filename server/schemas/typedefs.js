@@ -24,7 +24,8 @@ type OAuthResponse{
     token:String!
 }
 type Query{
-    identity:String
+    identity:String,
+    profile:UserProfile
 }
 type Mutation{
     signup(email:String!,password:String!):AuthPayload
