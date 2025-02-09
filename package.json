@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@lexical/react": "^0.24.0",
+    "@liveblocks/client": "^2.17.0",
+    "@liveblocks/react": "^2.17.0",
+    "@liveblocks/react-lexical": "^2.17.0",
+    "@liveblocks/react-ui": "^2.17.0",
+    "lexical": "^0.24.0"
+  }
+}
