@@ -61,13 +61,11 @@ const Page = () => {
                         <p className='border-2 border-gray-500 rounded-lg p-2'>{profiledata?.profile.about}</p>
                     </div>
                     <div className='bg-gray-500 w-full h-[100vh] p-2 font-bold'>
-                        <div className='w-fit mx-auto p-2 bg-gray-300 h-[30%] rounded-lg flex flex-col items-center space-y-4 
-                    cursor-text justify-center'>
-                            <Image src={"https://i.pinimg.com/originals/12/e3/fb/12e3fb42f1bbb70f41fb392a3f7b6686.gif"} alt='Profile Picture' width={80} height={100} className='rounded-full' />
-                            <Room>
-                                <Editor />
-                            </Room>
-                        </div>
+
+                        <Room >
+
+                        </Room>
+
                     </div>
                 </div>}
         </div>

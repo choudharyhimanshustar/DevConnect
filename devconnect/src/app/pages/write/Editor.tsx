@@ -22,10 +22,10 @@ export function Editor() {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="w-[50vw] flex items-center justify-center ">
+      <div className="w-[50vw] flex items-center  ">
         <RichTextPlugin
-          contentEditable={<ContentEditable />}
-          placeholder={<div className="border-2 w-full rounded-lg border-gray-500 p-2">Start typing here…</div>}
+          contentEditable={<ContentEditable id="content-editable" className="w-full outline-none"/>}
+          placeholder={<div onClick={()=>document.getElementById("content-editable")?.click()} className=" w-fit absolute rounded-lg border-gray-500 p-2">Start typing here…</div>}
           ErrorBoundary={LexicalErrorBoundary}
         />
         <LiveblocksPlugin>
