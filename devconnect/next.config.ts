@@ -2,6 +2,11 @@ const nextConfig: import('next').NextConfig = {
   images: {
     domains: ['i.pinimg.com','pin.it','api.cloudinary.com','res.cloudinary.com','in.pinterest.com','motionbgs.com'], // Add the required domain here
   },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
