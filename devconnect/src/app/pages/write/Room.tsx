@@ -33,7 +33,7 @@ export function Room({ children }: { children: ReactNode }) {
 
 
 function Content({ children }: { children: ReactNode }) {
-  const blogRef = useRef<HTMLInputElement>(null);
+  const blogRef = useRef<HTMLTextAreaElement>(null);
   let blogs = useStorage((root) => root.blogs);
   const updateStorage = useMutation(({ storage }, newBlog: string) => {
     const newblogs = storage.get("blogs");
@@ -55,8 +55,9 @@ function Content({ children }: { children: ReactNode }) {
           <Image src={"https://i.pinimg.com/originals/12/e3/fb/12e3fb42f1bbb70f41fb392a3f7b6686.gif"} alt='Profile Picture' width={80} height={100} className='rounded-full' />
 
 
-          <textarea placeholder="Add a blog" type="text"
-            className={` w-[50vw] h-[5vh] focus:h-[30vh] bg-gray-300  outline-none resize-none rounded-md p-1 overflow-hidden`} ref={blogRef}
+          <textarea placeholder="Add a blog"
+            className={` w-[50vw] h-[5vh] focus:h-[30vh] bg-gray-300  outline-none resize-none rounded-md p-1 overflow-hidden`}
+            ref={blogRef}
             onFocus={() => document.getElementById("savebtn")?.classList.remove("hidden")}
             onBlur={() => document.getElementById("savebtn")?.classList.add("hidden")}
           />
