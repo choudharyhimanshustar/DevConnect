@@ -34,7 +34,7 @@ export function Room({ children }: { children: ReactNode }) {
 
 function Content({ children }: { children: ReactNode }) {
   const blogRef = useRef<HTMLInputElement>(null);
-  var blogs = useStorage((root) => root.blogs);
+  let blogs = useStorage((root) => root.blogs);
   const updateStorage = useMutation(({ storage }, newBlog: string) => {
     const newblogs = storage.get("blogs");
     newblogs.insert(newBlog, 0);
@@ -72,6 +72,7 @@ function Content({ children }: { children: ReactNode }) {
         <div className="max-w-[70vw] flex flex-row grid grid-cols-3 max-h-[80vh] overflow-y-auto space-y-4 mt-5 p-2">
           {blogs.map((blog, index) => (
             <Tilt
+              key={index}
               className={`${index === 0 ? 'mb-0 mt-[16px]' : ''} bg-gray-200 text-black p-2 m-2 rounded-md w-[20vw] max-h-[50vh] overflow-hidden text-wrap break-words  opacity-40 
             hover:opacity-100 cursor-pointer flex`}>
               <div key={index}
